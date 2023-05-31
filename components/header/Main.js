@@ -41,7 +41,7 @@ export default function Main({ searchHandler }) {
         <Link href="/cart">
           <a className={styles.cart}>
             <FaOpencart />
-            <span>{cart.cartItems?.length}</span>
+            {cart.cartItems?.length > 0 && <span>{cart.cartItems?.length}</span>}
           </a>
         </Link>
       </div>
