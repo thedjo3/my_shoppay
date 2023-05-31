@@ -8,6 +8,12 @@
       flex-direction: column;
       gap: 5px;
     }
+    &__error {
+      margin-bottom: 10px;
+      padding: 5px;
+      background: $error-color;
+      color: #fff;
+    }
   }
 }
 .apply_btn {
@@ -35,7 +41,7 @@
       }
     }
   }
-  .coupon_span {
+  .coupon__success {
     background: $success-color;
     color: #fff;
   }

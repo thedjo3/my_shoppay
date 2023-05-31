@@ -21,9 +21,12 @@ export default function Summary({
   const validateCoupon = Yup.object({
     coupon: Yup.string().required("Pleace enter a coupon first !"),
   });
+
   const applyCouponHandler = async () => {
     const res = await applyCoupon(coupon);
     if (res.message) {
+      setTotalAfterDiscount(res.totalAfterDiscount);
+      setDiscount("");
       setError(res.message);
     } else {
       setTotalAfterDiscount(res.totalAfterDiscount);
@@ -31,6 +34,7 @@ export default function Summary({
       setError("");
     }
   };
+
   const placeOrderHandler = async () => {
     try {
       if (paymentMethod == "") {
@@ -53,6 +57,7 @@ export default function Summary({
       setOrder_Error(error.response.data.message);
     }
   };
+
   return (
     <div className={styles.summary}>
       <div className={styles.header}>
@@ -74,7 +79,7 @@ export default function Summary({
                 placeholder="*Coupon"
                 onChange={(e) => setCoupon(e.target.value)}
               />
-              {error && <span className={styles.error}>{error}</span>}
+              {error && <span className={styles.coupon__error}>{error}</span>}
               <button className={styles.apply_btn} type="submit">
                 Apply
               </button>
@@ -83,14 +88,14 @@ export default function Summary({
                   Total : <b>{cart.cartTotal}$</b>{" "}
                 </span>
                 {discount > 0 && (
-                  <span className={styles.coupon_span}>
+                  <span className={styles.coupon__success}>
                     Coupon applied : <b>-{discount}%</b>
                   </span>
                 )}
                 {totalAfterDiscount < cart.cartTotal &&
                   totalAfterDiscount != "" && (
                     <span>
-                      New price : <b>{totalAfterDiscount}$</b>
+                      Discounted price : <b>{totalAfterDiscount}$</b>
                     </span>
                   )}
               </div>
