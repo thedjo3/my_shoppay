@@ -46,7 +46,7 @@ export default function Review({ review }) {
         <div className={styles.review__extra}>
           <div className={styles.review__extra_likes}>
             {review.likes && review.likes?.likes}
-            <AiOutlineLike />
+            {/* <AiOutlineLike /> */}
           </div>
           <div className={styles.review__extra_date}>
             {review?.updatedAt?.slice(0, 10)}

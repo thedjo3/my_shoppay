@@ -132,7 +132,7 @@ export default function AddReview({ product, setReviews }) {
           value={rating}
           precision={0.5}
           onChange={(e) => setRating(e.target.value)}
-          style={{ color: "#facf19", fontSize: "3rem" }}
+          style={{ color: "#facf19", fontSize: "3rem"}}
         />
         <button
           className={`${styles.login_btn} ${loading ? styles.disabled : ""}`}

@@ -26,7 +26,8 @@ export default function Infos({ product, setActiveImg }) {
   const [success, setSuccess] = useState("");
   const {cart} = useSelector((state) => ({ ...state }));
   console.log("cart--->", cart);
-
+  // console.log("product--->", product);
+  
   useEffect(() => {
     dispatch(hideDialog());
   }, []);
@@ -72,6 +73,7 @@ export default function Infos({ product, setActiveImg }) {
           return p;
         });
         dispatch(updateCart(newCart));
+        setSuccess("Cart Updated Successfully.");
       } else {
         dispatch(
           addToCart({
@@ -81,6 +83,7 @@ export default function Infos({ product, setActiveImg }) {
             _uid,
           })
         );
+        setSuccess("Product Added to Cart Successfully.");
       }
     }
   };
@@ -223,8 +226,8 @@ export default function Infos({ product, setActiveImg }) {
         {error && <span className={styles.error}>{error}</span>}
         {success && <span className={styles.success}>{success}</span>}
         <Share />
-        <Accordian details={[product.description, ...product.details]} />
-        <SimillarSwiper />
+        <Accordian details={[product.description, ...product.details]} sizes = {[...product.sizes]} />
+        {/* <SimillarSwiper /> */}
       </div>
     </div>
   );
