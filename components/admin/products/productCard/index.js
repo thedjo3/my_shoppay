@@ -7,10 +7,31 @@ import Link from "next/link";
 import { TbEdit } from "react-icons/tb";
 import { AiOutlineEye } from "react-icons/ai";
 import { RiDeleteBin2Line } from "react-icons/ri";
-export default function ProductCard({ product }) {
+import { toast } from "react-toastify";
+import axios from "axios";
+import * as React from "react";
+
+export default function ProductCard({ product , key, setProduct}) {
+  const handleRemove = async (id) => {
+    try {
+      // console.log(id);
+      const { data } = await axios.delete("/api/admin/product", { data: { id } });
+      setProduct(data.products);
+      toast.success(data.message);
+      window.location.reload(false);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
     <div className={styles.product}>
-      <h1 className={styles.product__name}>{product.name}</h1>
+      <div className={styles.product__action}>
+      <h1 className={styles.product__action_name}>{product.name}</h1>
+        <Link href="">
+          <RiDeleteBin2Line onClick={() => handleRemove(product._id)}/>
+        </Link>
+      </div>
       <h2 className={styles.product__category}>#{product.category.name}</h2>
       <Swiper
         slidesPerView={1}
@@ -44,14 +65,11 @@ export default function ProductCard({ product }) {
                 <img src={p.images[0].url} alt="" />
               </div>
               <div className={styles.product__actions}>
-                <Link href={`/admin/dashboard/product/${product._id}`}>
+                {/* <Link href={`/admin/dashboard/product/${product._id}`}>
                   <TbEdit />
-                </Link>
+                </Link> */}
                 <Link href={`/product/${product.slug}?style=${i}`}>
                   <AiOutlineEye />
-                </Link>
-                <Link href="">
-                  <RiDeleteBin2Line />
                 </Link>
               </div>
             </div>

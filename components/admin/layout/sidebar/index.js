@@ -66,14 +66,6 @@ export default function Sidebar() {
               </a>
             </Link>
           </li>
-          <li className={route == "sales" ? styles.active : ""}>
-            <Link href="/admin/dashboard/sales">
-              <a>
-                <FcSalesPerformance />
-                <span className={styles.show}>Sales</span>
-              </a>
-            </Link>
-          </li>
           <li className={route == "orders" ? styles.active : ""}>
             <Link href="/admin/dashboard/orders">
               <a>
@@ -95,6 +87,14 @@ export default function Sidebar() {
               <a>
                 <AiFillMessage />
                 <span className={styles.show}>Messages</span>
+              </a>
+            </Link>
+          </li>
+          <li className={route == "sales" ? styles.active : ""}>
+            <Link href="/admin/dashboard/sales">
+              <a>
+                <FcSalesPerformance />
+                <span className={styles.show}>Sales</span>
               </a>
             </Link>
           </li>

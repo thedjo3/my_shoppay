@@ -21,10 +21,10 @@ export default function Images({
   const handleImages = (e) => {
     let files = Array.from(e.target.files);
     files.forEach((img, i) => {
-      if (images.length == 6) {
+      if (images.length >= 7) {
         dispatch(
           showDialog({
-            header: "Maximu 6 images are allowed.",
+            header: "Maximum 6 images are allowed.",
             msgs: [
               {
                 msg: `Maximum of total six images are allowed.`,
@@ -135,9 +135,9 @@ export default function Images({
                   <button onClick={() => setColorImage(img)}>
                     <GiExtractionOrb />
                   </button>
-                  <button>
+                  {/* <button>
                     <RiShape2Line />
-                  </button>
+                  </button> */}
                 </div>
               </div>
             ))

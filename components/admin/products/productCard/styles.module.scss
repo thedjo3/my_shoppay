@@ -2,10 +2,7 @@
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #eee;
-  &__name {
-    font-size: 16px;
-    padding: 5px 0 0 5px;
-  }
+
   &__category {
     font-size: 13px;
     font-weight: normal;
@@ -24,6 +21,22 @@
       }
     }
   }
+  &__action {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    &_name {
+      font-size: 16px;
+      padding: 5px 0 0 5px;
+    }
+    svg {
+      width: 30px;
+      height: 30px;
+      &:nth-of-type(1) {
+        fill: $error-color;
+      }
+    }
+  }
   &__actions {
     margin-top: 10px;
     display: flex;
@@ -35,14 +48,15 @@
       width: 30px;
       height: 30px;
       &:nth-of-type(1) {
-        stroke: $blue-color;
-      }
-      &:nth-of-type(2) {
+        //stroke: $blue-color;
         fill: $success-color;
       }
-      &:nth-of-type(3) {
-        fill: $error-color;
-      }
+      // &:nth-of-type(2) {
+      //   fill: $success-color;
+      // }
+      // &:nth-of-type(3) {
+      //   fill: $error-color;
+      // }
     }
   }
 }
