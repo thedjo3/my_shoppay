@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       <SessionProvider session={session}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <PayPalScriptProvider deferLoading={true}>
+            <PayPalScriptProvider deferLoading={true} options={{ "client-id": process.env.PAYPAL_CLIENT_ID }}>
               <ToastContainer
                 position="top-right"
                 autoClose={5000}

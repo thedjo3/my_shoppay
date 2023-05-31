@@ -8,7 +8,9 @@ const handler = nc().use(auth);
 handler.put(async (req, res) => {
   console.log("hello from api");
   await db.connectDb();
-  const order = await Order.findById(req.qurey.id);
+  // const order = await Order.findById(req.qurey.id);
+  const order = await Order.findById(req.body.order_id);
+  console.log(order);
   if (order) {
     order.isPaid = true;
     order.paidAt = Date.now();

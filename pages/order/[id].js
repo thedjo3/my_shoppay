@@ -5,10 +5,12 @@ import User from "../../models/User";
 import { IoIosArrowForward } from "react-icons/io";
 import db from "../../utils/db";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useState } from "react";
 import axios from "axios";
 import StripePayment from "../../components/stripePayment";
 import { getSession } from "next-auth/react";
+// import Cookies from 'universal-cookie';
+
 
 function reducer(state, action) {
   switch (action.type) {
@@ -29,12 +31,13 @@ export default function order({
   paypal_client_id,
   stripe_public_key,
 }) {
-  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
-  const [dispatch] = useReducer(reducer, {
-    loading: true,
-    error: "",
-    success: "",
+  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
+  const [status, setStatus] = useState(orderData.isPaid);
+  const [{success}, dispatch] = useReducer(reducer, {
+    // loading: true,
+    // error: "",
+    // success: "",
   });
 
   useEffect(() => {
@@ -72,15 +75,17 @@ export default function order({
         return order_id;
       });
   }
-  
+
   function onApproveHandler(data, actions) {
     return actions.order.capture().then(async function (details) {
       try {
         dispatch({ type: "PAY_REQUEST" });
-        const { data } = await axios.put(
-          `/api/order/${orderData._id}/pay`,
-          details
-        );
+        const { data } = await axios.put(`/api/order/${orderData._id}/pay`,{
+          details,
+          order_id: orderData._id,
+        });
+        console.log(data);
+        setStatus(data.order.isPaid);
         dispatch({ type: "PAY_SUCCESS", payload: data });
       } catch (error) {
         dispatch({ type: "PAY_ERROR", payload: error });
@@ -94,7 +99,7 @@ export default function order({
 
   return (
     <>
-      <Header country="country" />
+      <Header country="" />
       <div className={styles.order}>
         <div className={styles.container}>
           <div className={styles.order__infos}>
@@ -105,13 +110,13 @@ export default function order({
               </div>
               <div className={styles.order__header_status}>
                 Payment Status :{" "}
-                {orderData.isPaid ? (
+                {status ? (
                   <img src="../../../images/verified.png" alt="paid" />
                 ) : (
                   <img src="../../../images/unverified.png" alt="paid" />
                 )}
               </div>
-              <div className={styles.order__header_status}>
+              {/* <div className={styles.order__header_status}>
                 Order Status :
                 <span
                   className={
@@ -130,7 +135,7 @@ export default function order({
                 >
                   {orderData.status}
                 </span>
-              </div>
+              </div> */}
             </div>
             <div className={styles.order__products}>
               {orderData.products.map((product) => (
