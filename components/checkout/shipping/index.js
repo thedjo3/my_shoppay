@@ -18,6 +18,8 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { IoMdArrowDropupCircle } from "react-icons/io";
 import { AiOutlinePlus } from "react-icons/ai";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
+import { useRouter } from "next/router";
+
 const initialValues = {
   firstName: "",
   lastName: "",
@@ -30,8 +32,10 @@ const initialValues = {
   country: "",
 };
 export default function Shipping({ user, addresses, setAddresses, profile }) {
+  const router = useRouter();
   const [shipping, setShipping] = useState(initialValues);
   const [visible, setVisible] = useState(user?.address.length ? false : true);
+
   const {
     firstName,
     lastName,
@@ -43,6 +47,7 @@ export default function Shipping({ user, addresses, setAddresses, profile }) {
     address2,
     country,
   } = shipping;
+
   const validate = Yup.object({
     firstName: Yup.string()
       .required("First name is required.")
@@ -78,22 +83,31 @@ export default function Shipping({ user, addresses, setAddresses, profile }) {
       .max(100, "Address Line 2 should contain 5-100 characters."),
     country: Yup.string().required("Country name is required."),
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setShipping({ ...shipping, [name]: value });
   };
+
   const saveShippingHandler = async () => {
     const res = await saveAddress(shipping);
-    setAddresses(res.addresses);
+    setAddresses(res?.addresses);
+    // window.location.reload(false);
+    // setAddresses([...addresses, res.addresses]);
+    setVisible(false);
+    router.replace(router.asPath);
   };
+
   const changeActiveHandler = async (id) => {
     const res = await changeActiveAddress(id);
     setAddresses(res.addresses);
   };
+  
   const deleteHandler = async (id) => {
     const res = await deleteAddress(id);
     setAddresses(res.addresses);
   };
+  
   return (
     <div className={styles.shipping}>
       {!profile && (
@@ -107,12 +121,13 @@ export default function Shipping({ user, addresses, setAddresses, profile }) {
             <div
               className={styles.address__delete}
               onClick={() => deleteHandler(address._id)}
+              key={address?._id}
             >
               <IoIosRemoveCircleOutline />
             </div>
             <div
-              className={`${styles.address} ${address.active && styles.active}`}
-              key={address._id}
+              className={`${styles.address} ${address?.active && styles.active}`}
+              key={address?._id}
               onClick={() => changeActiveHandler(address._id)}
             >
               <div className={styles.address__side}>
@@ -121,8 +136,8 @@ export default function Shipping({ user, addresses, setAddresses, profile }) {
               <div className={styles.address__col}>
                 <span>
                   <FaIdCard />
-                  {address.firstName.toUpperCase()}{" "}
-                  {address.lastName.toUpperCase()}
+                  {address?.firstName.toUpperCase()}{" "}
+                  {address?.lastName.toUpperCase()}
                 </span>
                 <span>
                   <GiPhone />
@@ -227,7 +242,7 @@ export default function Shipping({ user, addresses, setAddresses, profile }) {
               />
               <ShippingInput
                 name="address1"
-                placeholder="Address 1"
+                placeholder="*Address 1"
                 onChange={handleChange}
               />
               <ShippingInput
