@@ -34,7 +34,7 @@ handler.post(async (req, res) => {
     const activation_token = createActivationToken({
       id: addedUser._id.toString(),
     });
-    const url = `${process.env.BASE_URL}/activate/${activation_token}`;
+    const url = `${process.env.BASE_URL}/auth/activate/${activation_token}`;
     sendEmail(email, url, "", "Activate your account.", activateEmailTemplate);
     await db.disconnectDb();
     res.json({

@@ -39,6 +39,7 @@ export default function forgot() {
       setError(error.response.data.message);
     }
   };
+
   return (
     <>
       {loading && <DotLoaderSpinner loading={loading} />}

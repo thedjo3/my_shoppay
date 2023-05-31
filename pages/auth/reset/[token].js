@@ -49,6 +49,7 @@ export default function reset({ user_id }) {
       setError(error.response.data.message);
     }
   };
+
   return (
     <>
       {loading && <DotLoaderSpinner loading={loading} />}
@@ -116,7 +117,9 @@ export async function getServerSideProps(context) {
     };
   }
   const token = query.token;
-  const user_id = jwt.verify("pojadphjapidja", process.env.RESET_TOKEN_SECRET);
+
+  const user_id = jwt.verify(token, process.env.RESET_TOKEN_SECRET);
+
   if (user_id == null) {
     console.log("adoajdàihjadiohiodhjioadha");
   }
