@@ -108,7 +108,7 @@ export default function create({ parents, categories }) {
       .required("Please add a name")
       .min(10, "Product name must bewteen 10 and 300 characters.")
       .max(300, "Product name must bewteen 10 and 300 characters."),
-    brand: Yup.string().required("Please add a brand"),
+    brand: Yup.string().required("Please add a brand").min(2, "Too short"),
     category: Yup.string().required("Please select a category."),
     /*
     subCategories: Yup.array().min(
