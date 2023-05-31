@@ -71,12 +71,12 @@ export default function cart() {
               selected={selected}
               saveCartToDbHandler={saveCartToDbHandler}
             />
-            <PaymentMethods />
+            <PaymentMetthods />
           </div>
         ) : (
           <Empty />
         )}
-        <ProductsSwiper products={women_swiper} />
+        {/* <ProductsSwiper products={women_swiper} /> */}
       </div>
     </>
   );

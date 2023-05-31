@@ -3,8 +3,6 @@ import Link from "next/link";
 import styles from "./styles.module.scss";
 import { IoSettingsOutline } from "react-icons/io5";
 import { HiOutlineClipboardList } from "react-icons/hi";
-import { BsHeart } from "react-icons/bs";
-import { AiOutlineMessage } from "react-icons/ai";
 import React, { useRef, useState } from "react";
 import { signIn } from "next-auth/react";
 // Import Swiper React components
@@ -16,6 +14,8 @@ import "swiper/css/effect-cards";
 // import required modules
 import { EffectCards, Navigation } from "swiper";
 import { userSwiperArray } from "../../../data/home";
+import { MdOutlineLocalShipping } from "react-icons/md";
+import { RiLockPasswordLine } from "react-icons/ri";
 export default function User() {
   const { data: session } = useSession();
   return (
@@ -45,34 +45,35 @@ export default function User() {
         )}
         <ul className={styles.user__links}>
           <li>
-            <Link href="/profile">
+            <Link href={ session ? "/profile" : "/"}>
               <a>
                 <IoSettingsOutline />
               </a>
             </Link>
           </li>
           <li>
-            <Link href="">
+            <Link href={ session ? "profile/orders" : "/"}>
               <a>
                 <HiOutlineClipboardList />
               </a>
             </Link>
           </li>
           <li>
-            <Link href="">
+            <Link href={ session ? "profile/address" : "/"}>
               <a>
-                <AiOutlineMessage />
+                <MdOutlineLocalShipping />
               </a>
             </Link>
           </li>
           <li>
-            <Link href="">
+            <Link href={ session ? "profile/security" : "/"}>
               <a>
-                <BsHeart />
+                <RiLockPasswordLine />
               </a>
             </Link>
           </li>
         </ul>
+        <div></div>
         <div className={styles.user__swiper}>
           <img
             src="https://assets.stickpng.com/images/5a5a6d2414d8c4188e0b088d.png"

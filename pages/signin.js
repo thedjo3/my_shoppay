@@ -119,7 +119,7 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
   const country = {
     name: "Bulgaria",
     flag: "https://cdn-icons-png.flaticon.com/512/197/197502.png?w=360",
-};
+  };
   return (
     <>
       {loading && <DotLoaderSpinner loading={loading} />}
@@ -136,9 +136,6 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
           </div>
           <div className={styles.login__form}>
             <h1>Sign in</h1>
-            <p>
-              Get access to one of the best Eshopping services in the world.
-            </p>
             <Formik
               enableReinitialize
               initialValues={{
@@ -207,9 +204,6 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
         <div className={styles.login__container}>
           <div className={styles.login__form}>
             <h1>Sign up</h1>
-            <p>
-              Get access to one of the best Eshopping services in the world.
-            </p>
             <Formik
               enableReinitialize
               initialValues={{

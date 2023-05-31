@@ -19,6 +19,11 @@ export const validateCreateProduct = (product, images) => {
       msg: `Choose atleast 3 images (${3 - images.length} remaining).`,
       type: "error",
     });
+  } else if (images.length > 6) {
+    checks.push({
+      msg: `You can only add 6 images, you was added (${images.length}).`,
+      type: "error",
+    });
   } else {
     checks.push({
       msg: `${images.length} images choosen.`,
@@ -50,7 +55,7 @@ export const validateCreateProduct = (product, images) => {
   for (var i = 0; i < sizes.length; i++) {
     if (sizes[i].qty == "" || sizes[i].price == "" || sizes[i].size == "") {
       checks.push({
-        msg: `Please fill all informations on sizes.`,
+        msg: `Please fill all informations on sizes, quantity and price.`,
         type: "error",
       });
       break;
