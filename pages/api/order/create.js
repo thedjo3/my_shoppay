@@ -3,6 +3,7 @@ import User from "../../../models/User";
 import Order from "../../../models/Order";
 import db from "../../../utils/db";
 import auth from "../../../middleware/auth";
+
 const handler = nc().use(auth);
 
 handler.post(async (req, res) => {
@@ -16,7 +17,9 @@ handler.post(async (req, res) => {
       totalBeforeDiscount,
       couponApplied,
     } = req.body;
+
     const user = await User.findById(req.user);
+
     const newOrder = await new Order({
       user: user._id,
       products,
@@ -26,7 +29,9 @@ handler.post(async (req, res) => {
       totalBeforeDiscount,
       couponApplied,
     }).save();
+
     db.disconnectDb();
+
     return res.json({
       order_id: newOrder._id,
     });

@@ -96,6 +96,15 @@ export default function orders({ user, tab, orders }) {
 export async function getServerSideProps(ctx) {
   const { query, req } = ctx;
   const session = await getSession({ req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+      },
+    };
+  }
+  
   const tab = query.tab || 0;
   //------------
   const filter = query.q?.split("__")[1];

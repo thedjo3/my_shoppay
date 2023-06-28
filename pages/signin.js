@@ -18,6 +18,7 @@ import {
 import axios from "axios";
 import DotLoaderSpinner from "../components/loaders/dotLoader";
 import Router from "next/router";
+
 const initialvalues = {
   login_email: "",
   login_password: "",
@@ -29,6 +30,7 @@ const initialvalues = {
   error: "",
   login_error: "",
 };
+
 export default function signin({ providers, callbackUrl, csrfToken }) {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(initialvalues);
@@ -54,6 +56,7 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
       .email("Please enter a valid email address."),
     login_password: Yup.string().required("Please enter a password"),
   });
+  
   const registerValidation = Yup.object({
     name: Yup.string()
       .required("What's your name ?")
@@ -75,6 +78,7 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
       .required("Confirm your password.")
       .oneOf([Yup.ref("password")], "Passwords must match."),
   });
+
   const signUpHandler = async () => {
     try {
       setLoading(true);
@@ -113,6 +117,7 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
       setLoading(false);
       setUser({ ...user, login_error: res?.error });
     } else {
+
       return Router.push(callbackUrl || "/");
     }
   };

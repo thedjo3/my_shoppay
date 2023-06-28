@@ -24,6 +24,7 @@ import { useRouter } from "next/router";
 import { Pagination } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+
 export default function Browse({
   categories,
   subCategories,
@@ -37,7 +38,9 @@ export default function Browse({
   paginationCount,
   country,
 }) {
+
   const router = useRouter();
+
   const filter = ({
     search,
     category,
@@ -75,6 +78,7 @@ export default function Browse({
       query: query,
     });
   };
+
   const searchHandler = (search) => {
     if (search == "") {
       filter({ search: {} });

@@ -9,10 +9,10 @@ export default function Header() {
           <Link href="/browse">Store</Link>
         </li>
         <li>
-          <Link href="/browse">Electronics</Link>
+          {/* <Link href="/browse">Electronics</Link> */}
         </li>
         <li>
-          <Link href="/browse">Watches</Link>
+          {/* <Link href="/browse">Watches</Link> */}
         </li>
       </ul>
     </div>

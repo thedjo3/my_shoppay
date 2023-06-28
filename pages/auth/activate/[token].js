@@ -26,16 +26,16 @@ export default function activate({ user_id }) {
       setLoading(false);
       setSuccess(data.message);
       setError("");
-      // setTimeout(() => {
-      //   Router.push("/");
-      // }, 3000);
+      setTimeout(() => {
+        Router.push("/");
+      }, 3000);
     } catch (error) {
       setLoading(false);
       setSuccess("");
       setError(error.response.data.message);
-      // setTimeout(() => {
-      //   Router.push("/");
-      // }, 4000);
+      setTimeout(() => {
+        Router.push("/");
+      }, 4000);
     }
   }
 
@@ -71,7 +71,7 @@ export async function getServerSideProps(context) {
   const token  = query.token;
 
   const user_id = jwt.verify(token, process.env.ACTIVATION_TOKEN_SECRET);
-
+  
   return {
     props: {
       user_id: user_id.id,

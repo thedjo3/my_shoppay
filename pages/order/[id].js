@@ -9,7 +9,6 @@ import { useReducer, useEffect, useState } from "react";
 import axios from "axios";
 import StripePayment from "../../components/stripePayment";
 import { getSession } from "next-auth/react";
-// import Cookies from 'universal-cookie';
 
 
 function reducer(state, action) {
@@ -116,26 +115,6 @@ export default function order({
                   <img src="../../../images/unverified.png" alt="paid" />
                 )}
               </div>
-              {/* <div className={styles.order__header_status}>
-                Order Status :
-                <span
-                  className={
-                    orderData.status == "Not Processed"
-                      ? styles.not_processed
-                      : orderData.status == "Processing"
-                      ? styles.processing
-                      : orderData.status == "Dispatched"
-                      ? styles.dispatched
-                      : orderData.status == "Cancelled"
-                      ? styles.cancelled
-                      : orderData.status == "Completed"
-                      ? styles.completed
-                      : ""
-                  }
-                >
-                  {orderData.status}
-                </span>
-              </div> */}
             </div>
             <div className={styles.order__products}>
               {orderData.products.map((product) => (

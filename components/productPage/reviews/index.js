@@ -28,11 +28,12 @@ export default function Reviews({ product }) {
             </div>
           </div>
           <div className={styles.reviews__stats_reviews}>
-            {product.ratings.map((rating, i) => (
+            { product.ratings.map((rating, i) => (
               <div className={styles.reviews__stats_reviews_review}>
                 <Rating
                   name="half-rating-read"
                   defaultValue={5 - i}
+                  precision={0.5}
                   readOnly
                   style={{ color: "#FACF19" }}
                 />
@@ -42,7 +43,7 @@ export default function Reviews({ product }) {
                     style={{ width: `${rating.percentage}%` }}
                   ></div>
                 </div>
-                <span>{rating.percentage}%</span>
+                { product.rating != 0 && <span>{rating.percentage}%</span> }
               </div>
             ))}
           </div>

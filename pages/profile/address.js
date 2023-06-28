@@ -1,4 +1,5 @@
 import { getSession } from "next-auth/react";
+import Head from "next/head";
 import Layout from "../../components/profile/layout";
 import User from "../../models/User";
 import Shipping from "../../components/checkout/shipping";
@@ -8,6 +9,9 @@ export default function addresses({ user, tab }) {
   const [addresses, setAddresses] = useState(user.address.address);
   return (
     <Layout session={user.user} tab={tab}>
+      <Head>
+        <title>Profile - Address</title>
+      </Head>
       <div className={styles.header}>
         <h1>MY ADDRESSES</h1>
       </div>
@@ -24,6 +28,15 @@ export default function addresses({ user, tab }) {
 export async function getServerSideProps(ctx) {
   const { query, req } = ctx;
   const session = await getSession({ req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+      },
+    };
+  }
+
   const tab = query.tab || 0;
   //--------------
   const address = await User.findById(session.user.id).select("address").lean();

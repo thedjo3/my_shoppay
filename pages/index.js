@@ -31,34 +31,6 @@ export default function home({ country, products }) {
       <div className={styles.home}>
         <div className={styles.container}>
           <Main />
-          <FlashDeals />
-          <div className={styles.home__category}>
-            <Category
-              header="Dresses"
-              products={women_dresses}
-              background="#5a31f4"
-            />
-            {!isMedium && (
-              <Category
-                header="Shoes"
-                products={women_shoes}
-                background="#3c811f"
-              />
-            )}
-            {isMobile && (
-              <Category
-                header="Shoes"
-                products={women_shoes}
-                background="#3c811f"
-              />
-            )}
-            <Category
-              header="Accessories"
-              products={women_accessories}
-              background="#000"
-            />
-          </div>
-          {/* <ProductsSwiper products={women_swiper} /> */}
           <div className={styles.products}>
             {products.map((product) => (
               <ProductCard product={product} key={product._id} />
@@ -92,15 +64,3 @@ export async function getServerSideProps() {
     },
   };
 }
-/*
-            <ProductsSwiper
-            products={gamingSwiper}
-            header="For Gamers"
-            bg="#2f82ff"
-          />
-          <ProductsSwiper
-            products={homeImprovSwiper}
-            header="House Improvements"
-            bg="#5a31f4"
-          />
-            */

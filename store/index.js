@@ -2,6 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import thunk from "redux-thunk";
 import storage from "redux-persist/lib/storage";
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-community/async-storage';
 import { persistReducer } from "redux-persist";
 import cart from "./cartSlice";
 import expandSidebar from "./ExpandSlice";

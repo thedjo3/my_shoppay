@@ -106,7 +106,7 @@ export default function HeadingFilters({
         />
         <label htmlFor="shipping">Free Shipping</label>
       </div>
-      <div
+      {/* <div
         className={styles.filters__rating}
         onClick={() => ratingHandler(checkRating.result)}
       >
@@ -122,7 +122,7 @@ export default function HeadingFilters({
           <AiTwotoneStar />
           <AiTwotoneStar /> & up
         </label>
-      </div>
+      </div> */}
       <div className={styles.filters__sort}>
         <span>Sort by</span>
         <div

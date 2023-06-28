@@ -99,6 +99,15 @@ export default function security({ user, tab }) {
 export async function getServerSideProps(ctx) {
   const { query, req } = ctx;
   const session = await getSession({ req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+      },
+    };
+  }
+
   const tab = query.tab || 0;
   return {
     props: { user: session, tab },

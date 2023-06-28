@@ -30,7 +30,7 @@ export default function dashboard({ users, orders, products }) {
           </div>
           <div className={styles.header__right}>
             <Dropdown userImage={session?.user?.image} />
-            <Notifications />
+            {/* <Notifications /> */}
           </div>
         </div>
         <div className={styles.cards}>
@@ -176,11 +176,13 @@ export async function getServerSideProps({ req }) {
       },
     };
   }
+
   const users = await User.find().lean();
   const orders = await Order.find()
     .populate({ path: "user", model: User })
     .lean();
   const products = await Product.find().lean();
+  
   return {
     props: {
       users: JSON.parse(JSON.stringify(users)),

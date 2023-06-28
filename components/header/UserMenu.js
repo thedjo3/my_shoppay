@@ -22,9 +22,12 @@ export default function UserMenu({ session }) {
           </button>
         </div>
       )}
-      <ul>
+      {session && <ul>
         <li>
           <Link href="/profile">Account</Link>
+        </li>
+        <li>
+          <Link href="/profile/email">My Email</Link>
         </li>
         <li>
           <Link href="/profile/orders">My Orders</Link>
@@ -38,7 +41,7 @@ export default function UserMenu({ session }) {
         {/* <li>
           <Link href="/profile/whishlist">Whishlist</Link>
         </li> */}
-      </ul>
+      </ul>}
     </div>
   );
 }

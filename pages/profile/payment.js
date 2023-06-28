@@ -1,4 +1,5 @@
 import { getSession } from "next-auth/react";
+import Head from "next/head";
 import { useState } from "react";
 import Layout from "../../components/profile/layout";
 import User from "../../models/User";
@@ -25,6 +26,9 @@ export default function payment({ user, tab, defaultPaymentMethod }) {
   };
   return (
     <Layout session={user.user} tab={tab}>
+      <Head>
+        <title>Profile - Payment</title>
+      </Head>
       <div className={styles.header}>
         <h1>MY PAYMENT METHODS</h1>
       </div>
@@ -50,6 +54,15 @@ export default function payment({ user, tab, defaultPaymentMethod }) {
 export async function getServerSideProps(ctx) {
   const { query, req } = ctx;
   const session = await getSession({ req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+      },
+    };
+  }
+  
   const tab = query.tab || 0;
   //-----------------
   const user = await User.findById(session.user.id).select(

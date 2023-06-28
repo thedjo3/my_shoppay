@@ -43,7 +43,8 @@ export default function User() {
             </div>
           </div>
         )}
-        <ul className={styles.user__links}>
+        {session ? 
+        (<ul className={styles.user__links}>
           <li>
             <Link href={ session ? "/profile" : "/"}>
               <a>
@@ -72,7 +73,10 @@ export default function User() {
               </a>
             </Link>
           </li>
-        </ul>
+        </ul>)
+         : 
+        (<div style={{height: "50px"}}></div>)
+        }
         <div></div>
         <div className={styles.user__swiper}>
           <img

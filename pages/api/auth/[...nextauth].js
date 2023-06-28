@@ -11,6 +11,7 @@ import clientPromise from "./lib/mongodb";
 import bcrypt from "bcrypt";
 import db from "../../../utils/db";
 db.connectDb();
+
 export default NextAuth({
   adapter: MongoDBAdapter(clientPromise),
   providers: [
@@ -41,14 +42,6 @@ export default NextAuth({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
-    // TwitterProvider({
-    //   clientId: process.env.TWITTER_ID,
-    //   clientSecret: process.env.TWITTER_SECRET,
-    // }),
-    // FacebookProvider({
-    //   clientId: process.env.FACEBOOK_ID,
-    //   clientSecret: process.env.FACEBOOK_SECRET,
-    // }),
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,

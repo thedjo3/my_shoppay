@@ -12,8 +12,8 @@ import MainSwiper from "../../components/productPage/mainSwiper";
 import { useState } from "react";
 import Infos from "../../components/productPage/infos";
 import Reviews from "../../components/productPage/reviews";
-import ProductsSwiper from "../../components/productsSwiper";
-export default function product({ product, related }) {
+
+export default function product({ product }) {
   const [activeImg, setActiveImg] = useState("");
   
   const country = {
@@ -40,9 +40,6 @@ export default function product({ product, related }) {
             <Infos product={product} setActiveImg={setActiveImg} />
           </div>
           <Reviews product={product} />
-          {/*
-          <ProductsSwiper products={related} />
-          */}
         </div>
       </div>
     </>
@@ -55,13 +52,16 @@ export async function getServerSideProps(context) {
   const style = query.style;
   const size = query.size || 0;
   db.connectDb();
+
   //------------
   let product = await Product.findOne({ slug })
     .populate({ path: "category", model: Category })
     .populate({ path: "subCategories", model: SubCategory })
     .populate({ path: "reviews.reviewBy", model: User })
     .lean();
+    
   let subProduct = product.subProducts[style];
+
   let prices = subProduct.sizes
     .map((s) => {
       return s.price;
@@ -69,6 +69,7 @@ export async function getServerSideProps(context) {
     .sort((a, b) => {
       return a - b;
     });
+
   let newProduct = {
     ...product,
     style,
@@ -125,8 +126,8 @@ export async function getServerSideProps(context) {
           array.findIndex((el2) => el2.size === element.size) === index
       ),
   };
-  const related = await Product.find({ category: product.category._id }).lean();
-  //------------
+
+    //------------
   function calculatePercentage(num) {
     return (
       (product.reviews.reduce((a, review) => {
@@ -140,11 +141,10 @@ export async function getServerSideProps(context) {
     ).toFixed(1);
   }
   db.disconnectDb();
-  console.log("related", related);
+  
   return {
     props: {
       product: JSON.parse(JSON.stringify(newProduct)),
-      related: JSON.parse(JSON.stringify(related)),
     },
   };
 }
